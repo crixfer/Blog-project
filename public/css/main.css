@@ -4,7 +4,7 @@ body {
   color: #1c1c1c;
   font-size: 1rem;
   background-color: #faf5ee;
-  background: linear-gradient(rgba(247, 226, 201, 0.9019607843), rgba(241, 195, 154, 0.9019607843)), url("/img/bricks.avif");
+  background: linear-gradient(rgba(245, 238, 229, 0.9019607843), rgba(241, 195, 154, 0.9019607843)), url("/img/page-texture.avif");
   background-size: cover;
 }
 
@@ -367,6 +367,36 @@ img {
   right: 0;
   color: #e4e4e4;
   padding: 15px;
+}
+
+.admin-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-posts {
+  padding: 0;
+  margin: 0;
+}
+.admin-posts li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.admin-post-controls form {
+  display: inline-block;
+}
+.admin-post-controls form .btn {
+  display: inline-block;
+  background-color: #1c1c1c;
+  color: #e4e4e4;
+  border: 0;
+  text-decoration: none;
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  line-height: 2;
 }
 
 /*# sourceMappingURL=main.css.map */

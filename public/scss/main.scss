@@ -8,7 +8,8 @@ body {
   color: $black;
   font-size: $Font-size-base;
   background-color: $creamy;
-  background: linear-gradient(#f7e2c9e6, #f1c39ae6), url("/img/bricks.avif");
+  background: linear-gradient(#f5eee5e6, #f1c39ae6),
+    url("/img/page-texture.avif");
   background-size: cover;
 }
 
@@ -300,4 +301,36 @@ img {
   right: 0;
   color: $light-gray;
   padding: 15px;
+}
+
+// Dashboard Admin ---------->
+
+.admin-title {
+  @include flex-justify(space-between);
+  align-items: center;
+}
+
+.admin-posts {
+  padding: 0;
+  margin: 0;
+
+  & li {
+    @include flex-justify(space-between);
+    padding: 10px 0;
+  }
+}
+
+.admin-post-controls form {
+  display: inline-block;
+
+  & .btn {
+    display: inline-block;
+    background-color: $black;
+    color: $light-gray;
+    border: 0;
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    line-height: 2;
+  }
 }

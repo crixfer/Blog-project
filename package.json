@@ -23,6 +23,7 @@
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.18.1",
     "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.11.0",
     "mongoose": "^8.8.3",
     "nodemon": "^3.1.7",
     "sass": "^1.82.0"
