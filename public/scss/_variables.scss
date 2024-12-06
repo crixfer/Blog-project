@@ -1,0 +1,23 @@
+// Font Family
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+$MontserratFont: "Montserrat", sans-serif;
+
+// Font Size
+$Font-size-base: 1rem;
+$Font-size-mid: clamp(1.25rem, 0.61vw + 1.1rem, 1.58rem);
+$Font-size-lg: clamp(1.56rem, 1vh + 1.31rem, 2.11rem);
+$Font-size-xl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
+
+$Article-font-size: clamp(1.13rem, calc(1.08rem + 0.22vw), 1.25rem);
+
+// Colors
+$black: #1c1c1c;
+$gray: #7e7e7e;
+$light-gray: #e4e4e4;
+$red: #b30000;
+$creamy: #faf5ee;
+$white: #fff;
+$greenish: #20b2aa;
+
+// Borders
+$border-radius: 7px;

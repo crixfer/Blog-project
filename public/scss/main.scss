@@ -1,0 +1,303 @@
+@import "variables";
+@import "config";
+
+// IMPORTS ----------------------------------------------*
+
+body {
+  font-family: $MontserratFont;
+  color: $black;
+  font-size: $Font-size-base;
+  background-color: $creamy;
+  background: linear-gradient(#f7e2c9e6, #f1c39ae6), url("/img/bricks.avif");
+  background-size: cover;
+}
+
+// Font sizes & Styles------------------>
+a {
+  color: $black;
+}
+h1 {
+  font-size: $Font-size-xl;
+}
+h2 {
+  font-size: $Font-size-lg;
+}
+h3 {
+  font-size: $Font-size-mid;
+}
+
+input[type="text"],
+input[type="text"],
+input[type="text"],
+input[type="text"],
+select,
+textarea {
+  font-family: $MontserratFont;
+  font-size: $Font-size-base;
+  @include resets;
+}
+
+.keyboard {
+  @include Text-animation-crixfer;
+}
+
+// Buttons -------------------->
+
+.mag-glass {
+  //magnifying glass
+  width: 15px;
+  margin-left: 5px;
+}
+
+.btn {
+  background-color: $black;
+  border: none;
+  color: $white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.btn-delete {
+  padding: 10px 16px;
+  background-color: $red;
+}
+
+// Image -------------------->
+img {
+  @include responsive-img;
+}
+
+.container {
+  @include compact-design;
+}
+
+.main {
+  padding: 20px 0;
+}
+
+// Hero Section -------------->
+
+.hero-image {
+  max-height: 528px;
+  filter: drop-shadow(0 44px 34px rgba(0, 0, 0, 0.25));
+  overflow: hidden;
+  border-radius: $border-radius;
+}
+
+// Main Header ---------------->
+
+.header {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  padding-top: 10px;
+  grid-template-areas:
+    "logo button"
+    "menu menu";
+
+  &__logo {
+    grid-area: logo;
+    font-weight: 800;
+    font-size: 25px;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__nav {
+    grid-area: menu;
+    @include flex-justify(center);
+
+    // nav ul and a
+    & ul {
+      list-style-type: none;
+      display: flex;
+      gap: $Font-size-base;
+      font-weight: 600;
+      padding: 0;
+
+      & a {
+        @include hide-underscore;
+
+        &.active {
+          color: $gray;
+        }
+      }
+    }
+  }
+  // button behavior
+  &__button {
+    grid-area: button;
+    @include flex-justify(end);
+
+    & button {
+      @include flex-align(center);
+      gap: 0.3rem;
+      border: 0;
+      padding: 6px 12px;
+      background: none;
+      border-radius: $border-radius;
+      border: 2px solid transparent;
+      font-size: $Font-size-base;
+      font-weight: 600;
+      color: $black;
+
+      &:hover {
+        border: 2px solid $black;
+        transition: 1s;
+      }
+    }
+  }
+}
+
+// Header @media queries ----->
+
+@include respond-to(tablet) {
+  .header {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "logo menu button";
+  }
+}
+
+// Author - Homepage ---------->
+
+.author {
+  padding: 10px 0;
+  text-align: center;
+
+  &__heading {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    @include flex-justify(center);
+    gap: 1rem;
+  }
+
+  &__body {
+    font-size: $Font-size-mid;
+    margin: 5px 0 40px 0;
+    color: $gray;
+  }
+}
+
+// Home Article List ------------>
+
+.articles__heading {
+  margin-top: 4rem;
+  font-weight: 700;
+}
+.article-ul {
+  list-style-type: none;
+  @include padding-margin-zero;
+  font-size: $Article-font-size;
+  @include flex-direction(column);
+
+  & li a {
+    @include flex-direction(column);
+    justify-content: space-between;
+    text-decoration: 0;
+    margin: 18px 0;
+  }
+}
+
+.pagination {
+  font-size: 1.3rem;
+  color: $gray;
+  text-decoration: none;
+  margin-top: 40px;
+  display: inline-block;
+
+  &:hover {
+    color: $black;
+  }
+}
+
+.article-list__date {
+  font-size: $Font-size-base;
+  color: $gray;
+  width: 260px;
+  display: inline-block;
+}
+
+// Article Media Queries
+@include respond-to(tablet) {
+  .article-ul li a {
+    @include flex-direction(row);
+    align-items: center;
+  }
+
+  .article-list__date {
+    text-align: right;
+  }
+}
+
+// Unordered list behavior
+.article-ul {
+  & li {
+    font-size: 24px;
+    cursor: pointer;
+    transition: filter 0.1s;
+    border-bottom: 1px solid $gray;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      filter: none;
+    }
+  }
+
+  &:hover li {
+    filter: blur(3px);
+
+    &:hover {
+      filter: none;
+    }
+  }
+}
+
+.article {
+  white-space: pre-wrap;
+}
+
+// Footer ------------------------>
+
+.footer {
+  margin: 4rem;
+  text-align: center;
+}
+
+// SEARCH BAR ------------------------------------------>
+
+.searchBar {
+  visibility: hidden;
+  transform: translateY(-100px);
+  background-color: $black;
+  padding: 4px o;
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  &.open {
+    transform: translateY(0);
+    transition: transform 0.1s;
+  }
+
+  & input {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.searchClose {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: $light-gray;
+  padding: 15px;
+}

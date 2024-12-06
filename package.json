@@ -1,0 +1,33 @@
+{
+  "name": "blog-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "app.js",
+    "dev": "concurrently \"nodemon app.js\" \"sass --watch public/scss:public/css\""
+  },
+  "keywords": [],
+  "author": "crixfer",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
+    "connect-mongo": "^5.1.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.18.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.3",
+    "nodemon": "^3.1.7",
+    "sass": "^1.82.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
