@@ -344,10 +344,8 @@ img {
 }
 
 .searchBar {
-  visibility: hidden;
-  transform: translateY(-100px);
   background-color: #1c1c1c;
-  padding: 4px o;
+  padding: 4px 0;
   position: absolute;
   left: 0;
   right: 0;
@@ -361,7 +359,7 @@ img {
   padding: 0;
 }
 
-.searchClose {
+#searchClose {
   position: absolute;
   top: 0;
   right: 0;

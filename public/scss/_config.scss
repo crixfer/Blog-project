@@ -1,3 +1,5 @@
+@use "variables";
+
 // Mixins
 @mixin resets {
   display: block;
@@ -78,7 +80,7 @@ $desktop: 1080px;
   &:hover span,
   &.active span {
     opacity: 1; // Show the underscore on hover or when active
-    color: $greenish;
+    color: variables.$greenish;
   }
 }
 
