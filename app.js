@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import express from "express";
 import expressEjsLayouts from "express-ejs-layouts";
 import mainRoutes from "./server/routes/main.js";
+import adminRoutes from "./server/routes/admin.js";
 import connectDB from "./server/config/db.js";
 
 dotenv.config();
@@ -23,6 +24,7 @@ app.set("layout", "./layouts/main");
 app.set("view engine", "ejs");
 
 app.use("/", mainRoutes);
+app.use("/admin", adminRoutes);
 
 // listening port
 app.listen(PORT, () => {

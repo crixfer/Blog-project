@@ -1,12 +1,39 @@
-// Active Underscore code!!! ------------------------>
-document.addEventListener("DOMContentLoaded", () => {
-  const links = document.querySelectorAll("nav a"); // Select all nav links
-  const currentUrl = window.location.href; // Get the current full URL
+// // Active Underscore code!!! ------------------------>
+// document.addEventListener("DOMContentLoaded", () => {
+//   const links = document.querySelectorAll("nav a"); // Select all nav links
+//   const currentUrl = window.location.href; // Get the current full URL
 
-  links.forEach((link) => {
-    if (link.href === currentUrl) {
-      // Compare link href with current URL
-      link.classList.add("active"); // Add the active class
-    }
+//   links.forEach((link) => {
+//     if (link.href === currentUrl) {
+//       // Compare link href with current URL
+//       link.classList.add("active"); // Add the active class
+//     }
+//   });
+// });
+
+//Search bar and button
+
+document.addEventListener("DOMContentLoaded", function () {
+  const allButtons = document.querySelectorAll(".searchBtn");
+  const searchBar = document.querySelector(".searchBar");
+  const searchInput = document.getElementById("searchInput");
+  const searchClose = document.getElementById("searchClose");
+
+  //open
+  for (let i = 0; i < allButtons.length; i++) {
+    allButtons[i].addEventListener("click", function () {
+      searchBar.style.visibility = "visible";
+      searchBar.classList.add("open");
+      this.setAttribute("aria-expanded", "true");
+      searchInput.focus();
+    });
+  }
+
+  //close
+
+  searchClose.addEventListener("click", function () {
+    searchBar.style.visibility = "hidden";
+    searchBar.classList.remove("open");
+    this.setAttribute("aria-expanded", "false");
   });
 });

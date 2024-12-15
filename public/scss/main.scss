@@ -29,8 +29,8 @@ h3 {
 
 input[type="text"],
 input[type="text"],
-input[type="text"],
-input[type="text"],
+input[type="search"],
+input[type="password"],
 select,
 textarea {
   font-family: variables.$MontserratFont;
@@ -276,8 +276,8 @@ img {
 // SEARCH BAR ------------------------------------------>
 
 .searchBar {
-  // visibility: hidden;
-  // transform: translateY(-100px);
+  visibility: hidden;
+  transform: translateY(-100px);
   background-color: variables.$black;
   padding: 4px 0;
   position: absolute;
