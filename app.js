@@ -10,7 +10,6 @@ import cookieParser from "cookie-parser";
 import MongoStore from "connect-mongo";
 import session from "express-session";
 
-console.log("JWT_SECRET:", process.env.JWT_SECRET);
 console.log("MONGODB_URI:", process.env.MONGODB_URI);
 
 const app = express();

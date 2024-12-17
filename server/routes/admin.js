@@ -97,7 +97,9 @@ router.get("/dashboard", authMiddleware, async (req, res) => {
       data,
       layout: adminLayout,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 /**
@@ -115,10 +117,33 @@ router.get("/add-post", authMiddleware, async (req, res) => {
     const data = await Post.find();
     res.render("admin/add-post", {
       locals,
-      data,
       layout: adminLayout,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+/**
+ * POST /
+ * Admin - Create New Post
+ */
+
+router.post("/add-post", authMiddleware, async (req, res) => {
+  try {
+    if (!req.body.title || !req.body.body) {
+      //avoid empty fields or undefined ones
+      return res.status(400).json({ message: "Title and body are required" });
+    }
+    await Post.create({
+      title: req.body.title,
+      body: req.body.body,
+    });
+
+    res.redirect("/admin/dashboard");
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 //check login alt
