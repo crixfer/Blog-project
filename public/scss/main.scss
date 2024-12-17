@@ -322,15 +322,14 @@ img {
 
 .admin-post-controls form {
   display: inline-block;
-
-  & .btn {
-    display: inline-block;
-    background-color: variables.$black;
-    color: variables.$light-gray;
-    border: 0;
-    text-decoration: none;
-    font-size: 0.8rem;
-    padding: 4px 8px;
-    line-height: 2;
-  }
+}
+.admin-post-controls .btn {
+  display: inline-block;
+  background-color: variables.$black;
+  color: variables.$light-gray;
+  border: 0;
+  text-decoration: none;
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  line-height: 2;
 }

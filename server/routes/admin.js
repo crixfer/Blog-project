@@ -20,7 +20,7 @@ console.log("JWT Secret:", jwtSecret); // Checking: This should print the JWT_SE
 const authMiddleware = (req, res, next) => {
   const token = req.cookies.token;
   if (!token) {
-    return res.status(401).jason({ message: "Unauthorized" });
+    return res.status(401).json({ message: "Unauthorized" });
   }
 
   try {
@@ -28,7 +28,7 @@ const authMiddleware = (req, res, next) => {
     req.userId = decoded.userId;
     next();
   } catch (error) {
-    res.status(401).jason({ message: "Unauthorized" });
+    res.status(401).json({ message: "Unauthorized" });
   }
 };
 
@@ -80,12 +80,45 @@ router.post("/", async (req, res) => {
 });
 
 /**
- * POST
+ * GET /
  * Admin - Check Login
  */
 
 router.get("/dashboard", authMiddleware, async (req, res) => {
-  res.render("admin/dashboard");
+  try {
+    const locals = {
+      title: "Admin",
+      description: "Simple Blog created with NodeJs, Express & MongoDb.",
+    };
+
+    const data = await Post.find();
+    res.render("admin/dashboard", {
+      locals,
+      data,
+      layout: adminLayout,
+    });
+  } catch (error) {}
+});
+
+/**
+ * GET /
+ * Admin - Create New Post
+ */
+
+router.get("/add-post", authMiddleware, async (req, res) => {
+  try {
+    const locals = {
+      title: "Add post",
+      description: "Simple Blog created with NodeJs, Express & MongoDb.",
+    };
+
+    const data = await Post.find();
+    res.render("admin/add-post", {
+      locals,
+      data,
+      layout: adminLayout,
+    });
+  } catch (error) {}
 });
 
 //check login alt
