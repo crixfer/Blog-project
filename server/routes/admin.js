@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import Post from "../models/Post.js";
 import User from "../models/User.js";
@@ -7,7 +10,27 @@ import jwt from "jsonwebtoken";
 const router = express.Router();
 
 const adminLayout = "layouts/admin";
-const jwtsecret = process.env.JWT_SECRET;
+const jwtSecret = process.env.JWT_SECRET;
+console.log("JWT Secret:", jwtSecret); // Checking: This should print the JWT_SECRET
+
+/**
+ *  Check Login
+ */
+
+const authMiddleware = (req, res, next) => {
+  const token = req.cookies.token;
+  if (!token) {
+    return res.status(401).jason({ message: "Unauthorized" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, jwtSecret);
+    req.userId = decoded.userId;
+    next();
+  } catch (error) {
+    res.status(401).jason({ message: "Unauthorized" });
+  }
+};
 
 /**
  * GET
@@ -28,8 +51,8 @@ router.get("/", async (req, res) => {
 });
 
 /**
- * GET
- * Admin - Check Login Page
+ * POST
+ * Admin - Check Login
  */
 
 router.post("/", async (req, res) => {
@@ -39,18 +62,18 @@ router.post("/", async (req, res) => {
     const user = await User.findOne({ username });
 
     if (!user) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res.status(401).json({ message: "Invalid credentials!" });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
-    if (!password) {
-      return res.status(401).json({ message: "Invalid credentials" });
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Invalid credentials!" });
     }
 
-    const token = jwt.sign({ userId: user.id }, jwtSecret);
+    const token = jwt.sign({ userId: user._id }, jwtSecret);
     res.cookie("token", token, { httpOnly: true });
-    res.redirect("/dashboard");
+    res.redirect("admin/dashboard");
   } catch (error) {
     console.log(error);
   }
@@ -58,15 +81,31 @@ router.post("/", async (req, res) => {
 
 /**
  * POST
- * Admin - Check Login Page
+ * Admin - Check Login
  */
 
-router.get("/dashboard", async (req, res) => {
+router.get("/dashboard", authMiddleware, async (req, res) => {
   res.render("admin/dashboard");
 });
 
+//check login alt
+
+// router.post("/", async (req, res) => {
+//   try {
+//     const { username, password } = req.body;
+
+//     if (req.body.username === "admin" && req.body.password === "password") {
+//       res.send("You are logged in.");
+//     } else {
+//       res.send("Wrong username and password!");
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
 /**
- * GET
+ * POST
  * Admin - Register
  */
 
@@ -90,19 +129,3 @@ router.post("/register", async (req, res) => {
 });
 
 export default router;
-
-//check login alt
-
-// router.post("/", async (req, res) => {
-//     try {
-//       const { username, password } = req.body;
-
-//       if (req.body.username === "admin" && req.body.password === "password") {
-//         res.send("You are logged in.");
-//       } else {
-//         res.send("Wrong username and password!");
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   });

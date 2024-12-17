@@ -1,4 +1,6 @@
 import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import expressEjsLayouts from "express-ejs-layouts";
 import mainRoutes from "./server/routes/main.js";
@@ -8,7 +10,8 @@ import cookieParser from "cookie-parser";
 import MongoStore from "connect-mongo";
 import session from "express-session";
 
-dotenv.config();
+console.log("JWT_SECRET:", process.env.JWT_SECRET);
+console.log("MONGODB_URI:", process.env.MONGODB_URI);
 
 const app = express();
 const PORT = 2000;
