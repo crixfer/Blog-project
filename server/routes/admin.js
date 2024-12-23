@@ -11,7 +11,6 @@ const router = express.Router();
 
 const adminLayout = "layouts/admin";
 const jwtSecret = process.env.JWT_SECRET;
-console.log("JWT Secret:", jwtSecret); // Checking: This should print the JWT_SECRET
 
 /**
  *  Check Login
@@ -47,6 +46,7 @@ router.get("/", async (req, res) => {
     res.render("admin/login", { locals, layout: adminLayout });
   } catch (error) {
     console.log(error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
@@ -76,19 +76,20 @@ router.post("/", async (req, res) => {
     res.redirect("admin/dashboard");
   } catch (error) {
     console.log(error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
 /**
  * GET /
- * Admin - Check Login
+ * Admin - Dashboard
  */
 
 router.get("/dashboard", authMiddleware, async (req, res) => {
   try {
     const locals = {
-      title: "Admin",
-      description: "Simple Blog created with NodeJs, Express & MongoDb.",
+      title: "Dashboard",
+      description: "Free NodeJS User Management System.",
     };
 
     const data = await Post.find();
@@ -99,6 +100,7 @@ router.get("/dashboard", authMiddleware, async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
@@ -121,6 +123,7 @@ router.get("/add-post", authMiddleware, async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
@@ -140,9 +143,58 @@ router.post("/add-post", authMiddleware, async (req, res) => {
       body: req.body.body,
     });
 
-    res.redirect("/admin/dashboard");
+    res.redirect("admin/dashboard");
   } catch (error) {
     console.log(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+/**
+ * GET /
+ * Admin - Create New Post
+ */
+
+router.get("/edit-post/:id", authMiddleware, async (req, res) => {
+  try {
+    const locals = {
+      title: "Edit post",
+      description: "Free NodeJS User Management System.",
+    };
+
+    const data = await Post.findOne({ _id: req.params.id });
+
+    if (!data) {
+      return res.status(404).send("Post not found");
+    }
+
+    res.render("/admin/edit-post", {
+      locals,
+      data,
+      layout: adminLayout,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+/**
+ * PUT /
+ * Admin - Edit Post
+ */
+
+router.put("/edit-post/:id", authMiddleware, async (req, res) => {
+  try {
+    await Post.findByIdAndUpdate(req.params.id, {
+      title: req.body.title,
+      body: req.body.body,
+      updatedAt: Date.now(),
+    });
+
+    res.redirect(`/admin/edit-post/${req.params.id}`);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
@@ -183,6 +235,22 @@ router.post("/register", async (req, res) => {
     }
   } catch (error) {
     console.log(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+/**
+ * DELETE /
+ * Admin - Delete Post
+ */
+
+router.delete("/delete-post/:id", authMiddleware, async (req, res) => {
+  try {
+    await Post.deleteOne({ _id: req.params.id });
+    res.redirect("/admin/dashboard");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
