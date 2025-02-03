@@ -46,6 +46,11 @@ app.set("view engine", "ejs");
 
 app.locals.isActiveRoute = isActiveRoute;
 
+app.use((req, res, next) => {
+  res.locals.currentRoute = req.path; // ✅ Makes `currentRoute` available globally
+  next();
+});
+
 app.use("/", mainRoutes);
 app.use("/admin", adminRoutes);
 

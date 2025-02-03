@@ -4,7 +4,7 @@ body {
   color: #1c1c1c;
   font-size: 1rem;
   background-color: #faf5ee;
-  background: linear-gradient(rgba(245, 238, 229, 0.9019607843), rgba(241, 195, 154, 0.9019607843)), url("/img/page-texture.avif");
+  background: url("../img/paper-texture.jpeg") no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -328,7 +328,7 @@ img {
   filter: none;
 }
 .article-ul:hover li {
-  filter: blur(3px);
+  filter: opacity(0.5);
 }
 .article-ul:hover li:hover {
   filter: none;

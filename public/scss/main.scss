@@ -8,8 +8,7 @@ body {
   color: variables.$black;
   font-size: variables.$Font-size-base;
   background-color: variables.$creamy;
-  background: linear-gradient(#f5eee5e6, #f1c39ae6),
-    url("/img/page-texture.avif");
+  background: url("../img/paper-texture.jpeg") no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -254,7 +253,7 @@ img {
   }
 
   &:hover li {
-    filter: blur(3px);
+    filter: opacity(0.5);
 
     &:hover {
       filter: none;

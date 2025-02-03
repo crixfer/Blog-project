@@ -20,19 +20,20 @@ router.get("", async (req, res) => {
       .limit(perPage)
       .exec();
 
-    const count = await Post.count;
+    const count = await Post.countDocuments();
     const nextPage = parseInt(page) + 1;
     const hasNextPage = nextPage <= Math.ceil(count / perPage);
 
     res.render("index", {
       locals,
       data,
+      currentRoute: "/",
       current: page,
       nextPage: hasNextPage ? nextPage : null,
-      currentRoute: "/",
     });
   } catch (error) {
     console.log(error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
@@ -86,6 +87,7 @@ router.post("/search", async (req, res) => {
     res.render("search", {
       data,
       locals,
+      currentRoute: "/search",
     });
   } catch (error) {
     console.log(error);

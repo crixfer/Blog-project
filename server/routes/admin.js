@@ -152,7 +152,7 @@ router.post("/add-post", authMiddleware, async (req, res) => {
 
 /**
  * GET /
- * Admin - Create New Post
+ * Admin - Edit Post
  */
 
 router.get("/edit-post/:id", authMiddleware, async (req, res) => {
